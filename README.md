@@ -22,7 +22,7 @@ Necessário [Node.js](https://nodejs.org/) v8 ou superior.
 Instale o ConsultaNFE
 
 ```sh
-$ npm install --save consultanfe
+$ npm install --save sefaznfe
 ```
 
 Importe a biblioteca
@@ -39,8 +39,7 @@ QueryNFE.then((NFEDados) => {
 });
 
 ### Pendências
-
-- Escrever mais testes
+ 
 - Adicionar mais Unidades federativas
 
 ## Licença
