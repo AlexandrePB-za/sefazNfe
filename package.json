@@ -1,7 +1,7 @@
 {
-  "name": "consultanfe",
-  "version": "1.3.0",
-  "description": "Retorna os dados de uma NFE (Nota Fiscal Eletrônica), baseado no QRCode",
+  "name": "sefaznfe",
+  "version": "1.0.0",
+  "description": "Retorna os dados de cupom fiscal, baseado no QRCode",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git https://github.com/ymoreiratiti/consultaNFE"
+    "url": "git https://github.com/AlexandrePB-za/sefazNfe"
   },
   "keywords": [
     "NFE"
@@ -22,7 +22,7 @@
       "pre-commit": "tslint --fix --project ."
     }
   },
-  "author": "ymoreiratiti@gmail.com",
+  "author": "patotechsistemas@gmail.com",
   "license": "APACHE 2.0",
   "dependencies": {
     "axios": "^0.20.0",

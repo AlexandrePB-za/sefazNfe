@@ -1,4 +1,4 @@
-const consultaNFE = require('../dist/index')
+/*const consultaNFE = require('../dist/index')
 const QRCodeURL = 'https://www.sefaz.rs.gov.br/NFCE/NFCE-COM.aspx?chNFe=43180905316123000150650020000091901000184323&nVersao=100&tpAmb=1&cDest=03013156040&dhEmi=323031382d30392d30355431333a30313a33352d30333a3030&vNF=28.80&vICMS=0.00&digVal=6f5349373768426a6a6236765973527150614667585a6b62614b343d&cIdToken=000001&cHashQRCode=5CD8E1519993FFF94301D0B73049DF82622AE3CC'
 const QueryNFE = new consultaNFE(QRCodeURL).get();
 const chai = require('chai')
@@ -59,4 +59,4 @@ describe('Nota Fiscal - RS - Chave 43180905316123000150650020000091901000184323'
       })
       .catch(done)
   })
-}); 
+}); */

@@ -11,14 +11,14 @@ export = class ConsultaNFE {
    */
   constructor(url: string) {
     this.qrCodeURL = new URL(url);
-    this.detectUF();
-    this.consulta = new this.consulta[this.uf](this.qrCodeURL);
+    this.detectUF(); 
+    this.consulta = new this.consulta[this.uf](this.qrCodeURL); 
   }
 
    /*
    * Retorna uma promise com os dados coletados
    */
-  public get() {
+  public get() { 
     return this.consulta.get();
   }
 
@@ -28,12 +28,14 @@ export = class ConsultaNFE {
   private detectUF() {
     const lstHostSefaz: { [key: string]: string } = {
       'www.sefaz.rs.gov.br': 'rs',
+      'www.fazenda.pr.gov.br': 'pr',
       'nfce.fazenda.mg.gov.br': 'mg',
       'nfce.sefaz.ce.gov.br': 'ce',
-      'nfce.set.rn.gov.br': 'rn',
+      //'nfce.set.rn.gov.br': 'rn',
     };
 
     this.uf = lstHostSefaz[this.qrCodeURL.host.trim().toLowerCase()] || '';
+    
     if (!this.uf.length) throw new Error('Não foi possível detectar a UF');
   }
 };

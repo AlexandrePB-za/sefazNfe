@@ -54,16 +54,15 @@ export default class Consulta {
     const modelo: string = $('table:nth-of-type(3) > tbody > tr > td:nth-child(1)', scope).html() || '';
     const numero: string = $('table:nth-of-type(3) > tbody > tr > td:nth-child(3)', scope).html() || '';
     const serie: string = $('table:nth-of-type(3) > tbody > tr > td:nth-child(2)', scope).html() || '';
-    const strTotal: string = $('table:nth-of-type(4) > tbody > tr > td:nth-child(1)', scope)
-      .html() || '0';
+    const strTotal: string = $('table:nth-of-type(4) > tbody > tr > td:nth-child(1)', scope).html() || '0';
 
     //  Formata os dados
     const dataEmissao: Date | null = objDataEmissao.isValid()
       ? objDataEmissao.toDate()
       : null;
 
-    const total: number = Number(strTotal.split(' ')[1].split('.').join('').replace(',', '.'));
-
+    const total: number = Number(strTotal.split('R$ ').join('').replace(',', '.'));
+    //console.log(strTotal);
     return { dataEmissao, modelo, numero, serie, total, dataEntradaSaida: null };
   }
 

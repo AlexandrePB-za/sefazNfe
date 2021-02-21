@@ -1,4 +1,4 @@
-const consultaNFE = require('../dist/index')
+/*const consultaNFE = require('../dist/index')
 const QRCodeURL = 'http://nfce.set.rn.gov.br/consultarNFCe.aspx?p=24200816233389003251650130000188671000191710|2|1|1|6DDB7D66348E3378E1E97C774BA00770207EB504'
 const QueryNFE = new consultaNFE(QRCodeURL).get();
 const chai = require('chai')
@@ -93,4 +93,4 @@ describe('Nota Fiscal - RN - Chave 24200816233389003251650130000188671000191710'
       })
       .catch(done)
   })
-}); 
+}); */

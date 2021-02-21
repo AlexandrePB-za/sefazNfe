@@ -12,7 +12,7 @@ Biblioteca para retorno de uma [promise](https://developer.mozilla.org/pt-BR/doc
 ### Unidade Federativas Suportadas
 - CE - Ceará
 - MG - Minas Gerais
-- RN - Rio Grande do Norte
+- PR - Paraná
 - RS - Rio Grande do Sul
 
 ### Instalação
@@ -37,89 +37,6 @@ var QueryNFE = new consultaNFE(QRCodeURL).get();
 QueryNFE.then((NFEDados) => {
 	console.log(NFEDados);
 });
-
-/*
-Deve retornar:
-{
-  "cabecalho": {
-    "dataEmissao": "2018-10-13T13:48:25.000Z",
-    "dataEntradaSaida": null,
-    "modelo": "65",
-    "numero": "206903",
-    "serie": "104",
-    "total": 41.33
-  },
-  "emitente": {
-    "nome": "FORMENTON FL03",
-    "razaoSocial": "SUPERMERCADOS FORMENTON LTDA FL 3",
-    "cnpj": "12.384.687/0004-38",
-    "rua": "RUA NELSON PAIM TERRA, 934",
-    "bairro": "RIO BRANCO",
-    "cep": 92200040,
-    "cidade": "CANOAS",
-    "telefone": "(51)3031-1850",
-    "estado": "RS",
-    "ibge": 4304606
-  },
-  "produtos": [
-    {
-      "descricao": "MASSA LASANHA ROMENA 500G",
-      "quantidade": 1,
-      "unidade": "UN",
-      "preco": 6.98,
-      "codigo": 13437,
-      "NCM": 19021100,
-      "eanComercial": 7896249500066
-    },
-    {
-      "descricao": "CARNE BOV MOIDA PRIMEIRA kg",
-      "quantidade": 1.142,
-      "unidade": "KG",
-      "preco": 27.39,
-      "codigo": 12794,
-      "NCM": 2013000,
-      "eanComercial": null
-    },
-    {
-      "descricao": "AMAC GIRANDO SOL 2L TRAD TALCO",
-      "quantidade": 1,
-      "unidade": "UN",
-      "preco": 3.99,
-      "codigo": 1734,
-      "NCM": 38099190,
-      "eanComercial": 7896404601010
-    },
-    {
-      "descricao": "MOLHO TOMATE CAJAMAR 340G SC",
-      "quantidade": 1,
-      "unidade": "UN",
-      "preco": 1.19,
-      "codigo": 6492,
-      "NCM": 21032010,
-      "eanComercial": 7891080146893
-    },
-    {
-      "descricao": "MOLHO TOMATE CAJAMAR 340G SC",
-      "quantidade": 1,
-      "unidade": "UN",
-      "preco": 1.19,
-      "codigo": 6492,
-      "NCM": 21032010,
-      "eanComercial": 7891080146893
-    },
-    {
-      "descricao": "MOLHO TOMATE CAJAMAR 340G SC",
-      "quantidade": 1,
-      "unidade": "UN",
-      "preco": 1.19,
-      "codigo": 6492,
-      "NCM": 21032010,
-      "eanComercial": 7891080146893
-    }
-  ]
-}
-*/
-```
 
 ### Pendências
 

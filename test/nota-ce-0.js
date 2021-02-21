@@ -7,7 +7,7 @@ const chai = require("chai");
 //  Resultado Esperado
 const result = {
 	cabecalho: {
-		dataEmissao: new Date("2020-05-12T13:33:35.000Z"),
+		dataEmissao: new Date("2020-05-18T13:33:34.000Z"),
 		dataEntradaSaida: null,
 		modelo: null,
 		numero: "1",

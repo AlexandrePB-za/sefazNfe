@@ -48,11 +48,11 @@ export default class Consulta {
   private getCabecalho (): ICabecalho {
     const $ = this.html;
     const format = 'DD/MM/YYYY HH:mm:ssZ';
-    const scope = '#NFe > fieldset:nth-child(1) > table > tbody > tr';
+    const scope = '#NFe > fieldset > table > tbody tr';
 
     //  Extraí os dados
     const objDataEmissao = moment($('td:nth-child(4) > span', scope).html() || '', format);
-    const objDataEntradaSaida = moment($('td:nth-child(5) > span', scope).html() || '', format);
+    const objDataEntradaSaida = moment($('td:nth-child(0) > span', scope).html() || '', format);
     const modelo: string = $('td:nth-child(1) > span', scope).html() || '';
     const numero: string = $('td:nth-child(3) > span', scope).html() || '';
     const serie: string = $('td:nth-child(2) > span', scope).html() || '';
@@ -78,7 +78,7 @@ export default class Consulta {
     const scope = '#Emitente > fieldset > table > tbody';
 
     //  Extraí os dados
-    const nome: string = $('tr.col-2 > td:nth-child(2) > span', scope).html() || '';
+    const nome: string = $('td:nth-child(2) > span', scope).html() || '';
     const razaoSocial: string = $('tr.col-2 > td:nth-child(1) > span', scope).html() || '';
     const cnpj: string = $('tr:nth-child(2) > td:nth-child(1) > span', scope).html() || '';
     let rua: string = $('tr:nth-child(2) > td:nth-child(2) > span', scope).html() || '';
@@ -95,7 +95,10 @@ export default class Consulta {
     rua = rua.replace(/,\s*$/, '');
 
     const cep: number | null = Number(strCep.trim().replace('-', '')) || null;
-    const cidade: string = strCidade.split('-')[1].trim();
+    let cidade: string = strCidade.split('\n').join() 
+                                  .split(',').join('')
+                                  .split(' ').join('')
+                                    .split('-')[1]; 
     const ibge: number = Number(strCidade.split('-')[0].trim());
 
     return { nome, razaoSocial, cnpj, rua, bairro, cep, cidade, telefone, estado, ibge };

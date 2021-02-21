@@ -8,121 +8,114 @@ export default class Consulta {
     method: 'post',
     params: {},
     timeout: 1000 * 60,
-    url: 'http://nfce.sefaz.ce.gov.br/nfce/api/notasFiscal/qrcodev2/',
+    url: 'http://www.fazenda.pr.gov.br/nfce/qrcode?',
   };
   private html!: CheerioStatic;
 
   constructor(qrCodeURL: URL) {
-    const chaveNFe: string[] =
-                  qrCodeURL.searchParams.get('p')?.split('|') || [];
+    const chaveNFe: string = qrCodeURL.searchParams.get('chNFe')
+      || qrCodeURL.searchParams.get('p')
+      || '';
 
-    if (chaveNFe === []) throw new Error('Não foi possível detectar a chave do parâmetro');
+    if (!chaveNFe.length) throw new Error('Não foi possível detectar a chave do parâmetro');
 
-    this.axiosConfig.data = {
-      chave_acesso: chaveNFe[0],
-      versao_qrcode: chaveNFe[1],
-      tipo_ambiente: chaveNFe[2],
-      identificador_csc: chaveNFe[3],
-      codigo_hash: chaveNFe[4],
-    };
+    this.axiosConfig.params.p = chaveNFe;
     this.axiosConfig.params.HML = false;
   }
 
-      /**
-       * Retorna uma promise com os dados coletados
-       */
-  public async get(): Promise<nfeDados> {
+  /**
+   * Retorna uma promise com os dados coletados
+   */
+  public async get (): Promise<nfeDados> {
     return this.fetchData()
-                  .then(cheerio.load)
-                  .then(
-                        (html: CheerioStatic): nfeDados => {
-                          this.html = html;
-                          return {
-                            cabecalho: this.getCabecalho(),
-                            emitente: this.getEmitente(),
-                            produtos: this.getProdutos(),
-                          };
-                        },
-                  );
+      .then(cheerio.load)
+      .then((html: CheerioStatic): nfeDados => {
+        this.html = html;
+
+        return {
+          cabecalho: this.getCabecalho(),
+          emitente: this.getEmitente(),
+          produtos: this.getProdutos(),
+        };
+      });
   }
 
-      /**
-       * Dados do Cabeçalho
-       */
-  private getCabecalho(): ICabecalho {
+  /**
+   * Dados do Cabeçalho
+   */
+  private getCabecalho (): ICabecalho {
     const $ = this.html;
     const format = 'DD/MM/YYYY HH:mm:ssZ';
     const scope = '#infos > div:nth-child(1) > ul > li';
             //  Extraí os dados
-    const objDataEmissao = moment(
-                  $('strong:nth-of-type(4)', scope)[0].next.data || '',
-                  format,
-            );
-    const numero: string =
-                  $('strong:nth-of-type(3)', scope)[0].next.data || '';
-    const serie: string =
-                  $('strong:nth-of-type(4)', scope)[0].next.data || '';
-    const strTotal: string =
-                  $('#totalNota > #linhaTotal:nth-child(2) > span').html() ||
-                  '0';
-            //  Formata os dados
+    const objDataEmissao = moment($('strong:nth-of-type(4)', scope)[0].next.data || '',format, );
+    let numero: string = $('strong:nth-of-type(3)', scope)[0].next.data || ''; 
+        numero = numero.replace('\n','').trim();
+    let serie: string = $('strong:nth-of-type(4)', scope)[0].next.data || '';
+        serie = serie.replace('\n','').trim();
+    const strTotal: string = $('#totalNota > #linhaTotal:nth-child(2) > span').html() || '0';
+    
+    //  Formata os dados
     const dataEmissao: Date | null = objDataEmissao.isValid()
-                  ? objDataEmissao.toDate()
-                  : null;
+                ? objDataEmissao.toDate()
+                : null;
 
     const total: number = Number(
-                  strTotal.split('.').join('').replace(',', '.'),
-            );
+                strTotal.split('.').join('').replace(',', '.'),
+          );
+
     return {
-      dataEmissao,
-      numero,
-      serie,
-      total,
-      dataEntradaSaida: null,
-      modelo: null,
+    dataEmissao,
+    numero,
+    serie,
+    total,
+    dataEntradaSaida: null,
+    modelo: null,
     };
   }
 
-      /**
-       * Dados do Emitente
-       */
+  /**
+   * Dados do Emitente
+   */
   private getEmitente(): IEmitente {
     const $ = this.html;
     const scope = '#conteudo > div:nth-child(2)';
 
             //  Extraí os dados
-    const nome: string = $('div:nth-child(1)', scope).html() || '';
-    const razaoSocial: string =
+    let nome: string = $('div:nth-child(1)', scope).html() || '';
+        nome = nome.replace('&amp','').replace(';','&');
+    let razaoSocial: string =
                   $('div:nth-child(1)', scope).html() || '';
-
+        razaoSocial = razaoSocial.replace('&amp','').replace(';','&');
     let cnpj: string = $('div:nth-child(2)', scope).html() || '';
     const endereco: string = $('div:nth-child(3)', scope).html() || '';
 
             //  Formata os dados
-    cnpj = cnpj.split(':')[1];
-    const aux = endereco.split(',');
-    const rua: string = `${aux[0]}, ${aux[1]}`;
-    const bairro: string = aux[3];
-    const estado: string = aux[4];
-    const cidade: string = aux[5];
-
-    return {
-      nome,
-      razaoSocial,
-      cnpj,
-      rua,
-      bairro,
-      cidade,
-      estado,
-      telefone: null,
-      cep: null,
-      ibge: null,
-    };
+            cnpj = cnpj.split(':')[1].replace('\n','').replace('\t\t','').trim();
+            const aux = endereco.split(',');
+            let rua: string = `${aux[0]}, ${aux[1]}`;
+                rua = rua.replace('\n','').replace('\t\t','');
+            const bairro: string = aux[3].replace('\n','').replace('\t\t','');
+            const estado: string = aux[4].replace('\n','').replace('\t\t','');
+            const cidade: string = aux[5].replace('\n','').replace('\t\t','');
+        
+            return {
+              nome,
+              razaoSocial,
+              cnpj,
+              rua,
+              bairro,
+              cidade,
+              estado,
+              telefone: null,
+              cep: null,
+              ibge: null,
+            }; 
   }
 
-      /**
-       * Dados dos Produtos
-       */
+  /**
+   * Dados dos Produtos
+   */
   private getProdutos(): IProduto[] {
     const $ = this.html;
             // const scope = "#tabResult"
@@ -191,16 +184,14 @@ export default class Consulta {
                   },
             );
   }
-      /**
-       * Consulta no NFE
-       */
-  private fetchData(): any {
+
+  /**
+   * Consulta no NFE
+   */
+  private fetchData (): any {
     return axios(this.axiosConfig)
-                  .then(res => res.data.xml)
-                  .catch(() => {
-                    throw new Error(
-                              'Não foi possível efetuar o download da NFE',
-                        );
-                  });
+      .then(res => res.data)
+      .catch(() => { throw new Error('Não foi possível efetuar o download da NFE'); });
   }
+
 }
