@@ -22,13 +22,13 @@
       "pre-commit": "tslint --fix --project ."
     }
   },
-  "author": "patotechsistemas@gmail.com",
+  "author": "alexandreangelozanatta@gmail.com",
   "license": "APACHE 2.0",
   "dependencies": {
     "axios": "^0.20.0",
     "cheerio": "^1.0.0-rc.3",
     "moment": "^2.27.0"
-  },
+  }, 
   "devDependencies": {
     "@types/cheerio": "^0.22.21",
     "chai": "^4.2.0",

@@ -49,9 +49,9 @@ export default class Consulta {
     const scope = '#infos > div:nth-child(1) > ul > li';
             //  Extraí os dados
     const objDataEmissao = moment($('strong:nth-of-type(4)', scope)[0].next.data || '',format, );
-    let numero: string = $('strong:nth-of-type(3)', scope)[0].next.data || ''; 
+    let numero: string = $('strong:nth-of-type(2)', scope)[0].next.data || ''; 
         numero = numero.replace('\n','').trim();
-    let serie: string = $('strong:nth-of-type(4)', scope)[0].next.data || '';
+    let serie: string = $('strong:nth-of-type(3)', scope)[0].next.data || '';
         serie = serie.replace('\n','').trim();
     const strTotal: string = $('#totalNota > #linhaTotal:nth-child(2) > span').html() || '0';
     

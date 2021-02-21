@@ -10,8 +10,8 @@ const result = {
 		dataEmissao: new Date("2020-10-29T21:23:48.000Z"),
 		dataEntradaSaida: null,
 		modelo: null,
-		numero: "11",
-		serie: "29/10/2020 18:23:48  - Via Consumidor",
+		numero: "98537",
+		serie: "11",
 		total: 50.65,
 	},
 	emitente: {
