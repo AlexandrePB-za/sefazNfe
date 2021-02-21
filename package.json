@@ -1,0 +1,44 @@
+{
+  "name": "consultanfe",
+  "version": "1.3.0",
+  "description": "Retorna os dados de uma NFE (Nota Fiscal Eletrônica), baseado no QRCode",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && node ./sample/sample.js",
+    "test": "tsc && mocha",
+    "lint": "tslint --fix --project ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git https://github.com/ymoreiratiti/consultaNFE"
+  },
+  "keywords": [
+    "NFE"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "tslint --fix --project ."
+    }
+  },
+  "author": "ymoreiratiti@gmail.com",
+  "license": "APACHE 2.0",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "cheerio": "^1.0.0-rc.3",
+    "moment": "^2.27.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.21",
+    "chai": "^4.2.0",
+    "husky": "^4.2.5",
+    "mocha": "^8.1.1",
+    "tslint": "^6.1.3",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "^4.0.2"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
